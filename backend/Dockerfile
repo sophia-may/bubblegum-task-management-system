@@ -7,7 +7,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Chạy ứng dụng
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 # Copy file .jar đã build từ Stage 1 sang Stage 2
 COPY --from=build /app/target/*.jar app.jar
