@@ -24,7 +24,7 @@ A modern fullstack task management web application designed for teams to collabo
 ## 🛠️ Tech Stack
 
 - **Frontend:** Angular 17+
-- **Backend:** Java 17, Spring Boot 3, Spring Security (JWT)
+- **Backend:** Java 21, Spring Boot 3, Spring Security (JWT)
 - **Database:** PostgreSQL
 - **Deployment:** Supabase, Render, Vercel
 
