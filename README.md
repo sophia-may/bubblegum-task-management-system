@@ -4,7 +4,7 @@ A modern fullstack task management web application designed for teams to collabo
 
 ---
 
-## 🚀 Features
+## 📌 Features
 
 1. **User Authentication:** Log in and register to use JWT (JSON Web Token).
 
@@ -16,12 +16,18 @@ A modern fullstack task management web application designed for teams to collabo
 
 ---
 
+🚀 Live Demo
+
+👉 [https://your-demo-link.com](https://bubblegum-task-management-system.vercel.app/)
+
+---
+
 ## 🛠️ Tech Stack
 
 - **Frontend:** Angular 17+
 - **Backend:** Java 17, Spring Boot 3, Spring Security (JWT)
 - **Database:** PostgreSQL
-- **Deployment:** Docker, Google Cloud Run
+- **Deployment:** Supabase, Render, Vercel
 
 ---
 
@@ -39,6 +45,9 @@ The system is designed using a 3-Tier Architecture:
 
 <img width="1919" height="1068" alt="image" src="https://github.com/user-attachments/assets/5cbcd3c1-b9e1-4e9c-9339-dccb551c4e2e" />
 
+<img width="1899" height="1068" alt="image" src="https://github.com/user-attachments/assets/9c7ef8c7-8e2d-43ac-a8a5-5d0021236dda" />
+
+
 
 ---
 
@@ -52,7 +61,6 @@ git clone https://github.com/your-username/bubblegum-tms.git
 
 ```bash
 docker-compose up --build
-
 
 # Run frontend
 cd frontend
