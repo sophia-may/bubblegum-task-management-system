@@ -15,7 +15,8 @@ A modern fullstack task management web application designed for teams to collabo
 4. **Assignment:** The creator or administrator can assign tasks to other users via their User ID.
 
 
-## 🚀 Live Demo 👉 [https://your-demo-link.com](https://bubblegum-task-management-system.vercel.app/)
+## 🚀 Live Demo 
+👉 [BUBBLEGUM - Task Management System](https://bubblegum-task-management-system.vercel.app/)
 
 ---
 
