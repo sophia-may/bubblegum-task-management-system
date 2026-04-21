@@ -32,7 +32,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/auth/**", "/error").permitAll() // Cho phép không cần token với các API login/register
+                .requestMatchers("/auth/**", "/ping").permitAll() // Cho phép không cần token với các API login/register
                 .anyRequest().authenticated() // Tất cả các API khác bắt buộc phải có token
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
