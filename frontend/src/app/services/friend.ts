@@ -20,7 +20,7 @@ export interface FriendshipDto {
   providedIn: 'root'
 })
 export class FriendService {
-  private apiUrl = 'http://localhost:8080/api/friends';
+  private apiUrl = 'https://bubblegum-task-management-system.onrender.com/api/friends';
 
   constructor(private http: HttpClient) {}
 
