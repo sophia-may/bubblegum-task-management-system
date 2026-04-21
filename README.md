@@ -12,8 +12,9 @@ A modern fullstack task management web application designed for teams to collabo
 
 3. **Status Update:** Change the task status (`TODO` -> `IN_PROGRESS` -> `DONE`).
 
-4. **Assignment:** The creator or administrator can assign tasks to other users via their User ID.
+4. **Friends:** Users can add friends by their usernames.
 
+5. **Assignment:** Users are able to assign tasks to their friends.
 
 ## 🚀 Live Demo 
 👉 [BUBBLEGUM - Task Management System](https://bubblegum-task-management-system.vercel.app/)
@@ -43,9 +44,8 @@ The system is designed using a 3-Tier Architecture:
 
 <img width="1919" height="1068" alt="image" src="https://github.com/user-attachments/assets/5cbcd3c1-b9e1-4e9c-9339-dccb551c4e2e" />
 
+
 <img width="1899" height="1068" alt="image" src="https://github.com/user-attachments/assets/9c7ef8c7-8e2d-43ac-a8a5-5d0021236dda" />
-
-
 
 ---
 
