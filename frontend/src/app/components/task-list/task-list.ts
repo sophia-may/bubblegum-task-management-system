@@ -56,16 +56,16 @@ export class TaskListComponent implements OnInit, AfterViewInit {
 
   isSidebarCollapsed: boolean = false;
   isTeamsExpanded: boolean = true;
-  currentUsername: string = 'Khách';
+  currentUsername: string = 'Guest';
   readonly defaultLists: { id: string, name: string, count: number, checked: boolean, showCompleted: boolean }[] = [
-    { id: '1', name: 'Việc cần làm của tôi', count: 1, checked: true, showCompleted: false },
-    { id: '2', name: 'Dự án cá nhân', count: 1, checked: true, showCompleted: false },
-    { id: '3', name: 'Việc trên trường', count: 2, checked: false, showCompleted: false }
+    { id: '1', name: 'My Tasks', count: 1, checked: true, showCompleted: false },
+    { id: '2', name: 'Personal Project', count: 1, checked: true, showCompleted: false },
+    { id: '3', name: 'School Work', count: 2, checked: false, showCompleted: false }
   ];
   myLists: { id: string, name: string, count: number, checked: boolean, showCompleted: boolean }[] = [
-    { id: '1', name: 'Việc cần làm của tôi', count: 1, checked: true, showCompleted: false },
-    { id: '2', name: 'Dự án cá nhân', count: 1, checked: true, showCompleted: false },
-    { id: '3', name: 'Việc trên trường', count: 2, checked: false, showCompleted: false }
+    { id: '1', name: 'My Tasks', count: 1, checked: true, showCompleted: false },
+    { id: '2', name: 'Personal Project', count: 1, checked: true, showCompleted: false },
+    { id: '3', name: 'School Work', count: 2, checked: false, showCompleted: false }
   ];
   taskMetadata: { [taskId: number]: { listId: string; starred: boolean } } = {};
 
@@ -312,7 +312,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
 
     const exists = this.myLists.some((list) => list.name.toLowerCase() === name.toLowerCase());
     if (exists) {
-      alert('Tên nhóm đã tồn tại.');
+      alert('This group name already exists.');
       return;
     }
 
@@ -355,11 +355,11 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     if (!list) return;
 
     if (this.myLists.length <= 1) {
-      alert('Phải giữ lại ít nhất một danh sách.');
+      alert('You must keep at least one list.');
       return;
     }
 
-    if (typeof window !== 'undefined' && !window.confirm(`Xóa danh sách "${list.name}"? Các task trong danh sách sẽ được chuyển sang danh sách khác.`)) {
+    if (typeof window !== 'undefined' && !window.confirm(`Delete list "${list.name}"? Tasks in this list will be moved to another list.`)) {
       return;
     }
 
@@ -418,7 +418,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
         this.cdr.detectChanges(); 
       },
       error: (err) => {
-        console.error('Lỗi tải tasks', err);
+        console.error('Failed to load tasks', err);
         if (err.status === 403) this.logout(); // Nếu token hết hạn thì bắt đăng nhập lại
       }
     });
@@ -503,7 +503,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
 
   submitInlineCreate() {
     if (!this.inlineCreateTitle.trim() || !this.inlineCreateListId) {
-      alert('Vui lòng nhập tên nhiệm vụ!');
+      alert('Please enter a task title.');
       return;
     }
     const taskPayload: Task = {
@@ -521,7 +521,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
         this.loadTasks(); // Load lại danh sách
         this.checkBoardControls();
       },
-      error: (err) => console.error('Lỗi tạo task', err)
+      error: (err) => console.error('Failed to create task', err)
     });
   }
 
@@ -529,7 +529,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     const deadline = this.buildDeadline(this.createTaskDeadlinePreset, this.createTaskDeadlineCustom);
 
     if (!this.createTaskForm.title || !deadline || !this.createTaskForm.listId) {
-      alert('Vui lòng nhập đủ Tiêu đề và Deadline!');
+      alert('Please provide both title and deadline.');
       return;
     }
 
@@ -552,11 +552,11 @@ export class TaskListComponent implements OnInit, AfterViewInit {
             });
           }
         }
-        alert('Tạo task thành công!');
+        alert('Task created successfully.');
         this.closeCreateTaskModal();
         this.loadTasks(); // Load lại danh sách
       },
-      error: (err) => console.error('Lỗi tạo task', err)
+      error: (err) => console.error('Failed to create task', err)
     });
   }
 
@@ -564,7 +564,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     if (!id) return;
     this.taskService.updateStatus(id, newStatus).subscribe({
       next: () => this.loadTasks(),
-      error: (err) => alert('Lỗi: ' + (err.error?.message || err.message))
+      error: (err) => alert('Error: ' + (err.error?.message || err.message))
     });
   }
 
@@ -576,16 +576,16 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     if (!taskId) return;
     const assigneeId = this.assigneeIdMap[taskId];
     if (!assigneeId) {
-      alert('Vui lòng nhập ID người nhận!');
+      alert('Please select a friend to assign this task.');
       return;
     }
 
     this.taskService.assignTask(taskId, assigneeId).subscribe({
       next: () => {
-        alert('Giao việc thành công!');
+        alert('Task assigned successfully.');
         this.loadTasks();
       },
-      error: (err) => alert('Lỗi: Không có quyền hoặc user không tồn tại!')
+      error: (err) => alert('Error: You do not have permission or the user does not exist.')
     });
   }
 
@@ -635,10 +635,10 @@ export class TaskListComponent implements OnInit, AfterViewInit {
   sendFriendRequest(userId: number): void {
     this.friendService.sendRequest(userId).subscribe({
       next: () => {
-        alert('Đã gửi lời mời kết bạn');
+        alert('Friend request sent.');
         this.searchFriends(); // refresh if needed
       },
-      error: (err) => alert('Lỗi: ' + (err.error || 'Có lỗi xảy ra'))
+      error: (err) => alert('Error: ' + (err.error || 'Something went wrong'))
     });
   }
 
@@ -647,7 +647,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
       next: () => {
         this.loadFriendsData();
       },
-      error: (err) => alert('Lỗi: ' + err.error)
+      error: (err) => alert('Error: ' + err.error)
     });
   }
 
@@ -656,7 +656,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
       next: () => {
         this.loadFriendsData();
       },
-      error: (err) => alert('Lỗi: ' + err.error)
+      error: (err) => alert('Error: ' + err.error)
     });
   }
 }

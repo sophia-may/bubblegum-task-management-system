@@ -15,6 +15,8 @@ export class LoginComponent {
   credentials = { username: '', password: '', confirmPassword: '' };
   errorMessage = '';
   isRegisterMode = false;
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,16 +24,26 @@ export class LoginComponent {
     this.isRegisterMode = !this.isRegisterMode;
     this.errorMessage = '';
     this.credentials = { username: '', password: '', confirmPassword: '' };
+    this.showPassword = false;
+    this.showConfirmPassword = false;
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
   onSubmit() {
     if (this.isRegisterMode) {
       if (this.credentials.password !== this.credentials.confirmPassword) {
-        this.errorMessage = 'Mật khẩu xác nhận không khớp!';
+        this.errorMessage = 'Password confirmation does not match.';
         return;
       }
       if (!this.credentials.username || !this.credentials.password) {
-         this.errorMessage = 'Vui lòng nhập đầy đủ thông tin!';
+         this.errorMessage = 'Please fill in all required fields.';
          return;
       }
 
@@ -42,9 +54,9 @@ export class LoginComponent {
         },
         error: (err) => {
           if (err.status === 409) {
-            this.errorMessage = 'Tên đăng nhập đã tồn tại!';
+            this.errorMessage = 'Username already exists.';
           } else {
-            this.errorMessage = 'Có lỗi xảy ra, vui lòng thử lại sau.';
+            this.errorMessage = 'Something went wrong. Please try again later.';
           }
         }
       });
@@ -55,7 +67,7 @@ export class LoginComponent {
           this.router.navigate(['/tasks']); 
         },
         error: (err) => {
-          this.errorMessage = 'Sai tài khoản hoặc mật khẩu!';
+          this.errorMessage = 'Invalid username or password.';
         }
       });
     }
